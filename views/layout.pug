@@ -1,7 +1,15 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header(class="header")
+      h2(class="appName") Members Only 
+      a(href="/log-in", class="logInLink") Log In 
+      a(href="/sign-up", class="signUpLink") Sign Up
     block content
+    footer(class="footer") 
+      div Developed by Patrick Brebner (Github Link)
