@@ -1,0 +1,27 @@
+extends layout 
+
+block content 
+    h1= title 
+    form(action="", method="post")
+        div(class="formElement") 
+            label(for="firstName") First name 
+            input(type="text", id="firstName", name="firstName", required)
+        div(class="formElement")
+            label(for="lastName") Last name 
+            input(type="text", id="lastName", name="lastName", required)
+        div(class="formElement")
+            label(for="email") Email 
+            input(type="email", id="email", name="email", required) 
+        div(class="formElement")
+            label(for="password") Password 
+            input(type="password", id="password", name="password", required)
+        div(class="formElement")
+            label(for="passwordConfirm") Confirm password
+            input(type="password", id="passwordConfirm", name="passwordConfirm", required) 
+        div(class="formElement")
+            button(type="submit") Submit
+
+    if (errors)
+        ul
+            for error in errors
+                li!= error.msg
