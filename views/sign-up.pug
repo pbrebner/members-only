@@ -5,13 +5,13 @@ block content
     form(action="", method="post")
         div(class="formElement") 
             label(for="firstName") First name 
-            input(type="text", id="firstName", name="firstName", required)
+            input(type="text", id="firstName", name="firstName", required, value=(undefined===user ? '' : user.firstName))
         div(class="formElement")
             label(for="lastName") Last name 
-            input(type="text", id="lastName", name="lastName", required)
+            input(type="text", id="lastName", name="lastName", required, value=(undefined===user ? '' : user.lastName))
         div(class="formElement")
             label(for="email") Email 
-            input(type="email", id="email", name="email", required) 
+            input(type="email", id="email", name="email", required, value=(undefined===user ? '' : user.email)) 
         div(class="formElement")
             label(for="password") Password 
             input(type="password", id="password", name="password", required)
@@ -22,6 +22,7 @@ block content
             button(type="submit") Submit
 
     if (errors)
+        p please fix the following errors:
         ul
             for error in errors
                 li!= error.msg
