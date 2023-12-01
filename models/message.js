@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
-    title: { type: String, required: true, maxLength: 100 },
+    title: { type: String, required: true, maxLength: 30 },
     author: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    messageText: { type: String, required: true },
-    timeStamp: { type: Date },
+    message: { type: String, required: true, maxLength: 140 },
+    timeStamp: { type: Date, default: new Date() },
 });
 
 // Export model

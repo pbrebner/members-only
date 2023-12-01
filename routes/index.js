@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 // Require controller modules.
 const messageController = require("../controllers/messageController");
@@ -9,6 +9,12 @@ const userController = require("../controllers/userController");
 
 // GET home page
 router.get("/", messageController.index);
+
+// Get message form
+router.get("/new-message", messageController.newMessageGet);
+
+// Post new message
+router.post("/new-message", messageController.newMessagePost);
 
 // USER ROUTES
 
@@ -23,5 +29,8 @@ router.get("/log-in", userController.logInGet);
 
 // Post log-in page
 router.post("/log-in", userController.logInPost);
+
+// Get log-out
+router.get("/log-out", userController.logOutGet);
 
 module.exports = router;
