@@ -8,8 +8,12 @@ html(lang='en')
   body
     header(class="header")
       h2(class="appName") Members Only 
-      a(href="/log-in", class="logInLink") Log In 
-      a(href="/sign-up", class="signUpLink") Sign Up
+      if (currentUser)
+        a(href="/new-message", class="newMessageLink headerLink") Create New Message
+        a(href="/log-out", class="logOutLink headerLink") Log Out 
+      else
+        a(href="/log-in", class="logInLink headerLink") Log In 
+        a(href="/sign-up", class="signUpLink headerLink") Sign Up
     block content
     footer(class="footer") 
       div Developed by Patrick Brebner (Github Link)
