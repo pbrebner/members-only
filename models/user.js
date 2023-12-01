@@ -3,18 +3,18 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     firstName: { type: String, required: true, maxLength: 100 },
-    familyName: { type: String, required: true, maxLength: 100 },
-    username: { type: String, required: true, maxLength: 100 },
+    lastName: { type: String, required: true, maxLength: 100 },
+    email: { type: String, required: true, maxLength: 100 },
     password: { type: String, required: true },
-    memberStatus: { type: Boolean, required: true },
+    memberStatus: { type: Boolean, required: true, default: false },
     messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
 
 // Virtual for author's full name
-AuthorSchema.virtual("name").get(function () {
+UserSchema.virtual("name").get(function () {
     let fullname = "";
-    if (this.first_name && this.family_name) {
-        fullname = `${this.family_name}, ${this.first_name}`;
+    if (this.firstName && this.lastName) {
+        fullname = `${this.lastName}, ${this.firstName}`;
     }
 
     return fullname;
