@@ -6,7 +6,11 @@ const { body, validationResult } = require("express-validator");
 
 // Display Home Page Messages on Get
 exports.index = asyncHandler(async (req, res, next) => {
-    res.render("index", { title: "Messages" });
+    const messages = await Message.find()
+        .sort({ timeStamp: 1 })
+        .populate("author")
+        .exec();
+    res.render("index", { title: "Messages", messages: messages });
 });
 
 // Display New Message Form on Get

@@ -2,4 +2,12 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  if (currentUser)
+    h2 Welcome Back
+  each message in messages
+    div(class="messageContainer")
+    h3(class="messageTitle")= message.title 
+    p(class="messageText")= message.message
+    if (currentUser && currentUser.memberStatus === true)
+      p= message.author.name
+      p= message.timeStamp
