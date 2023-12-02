@@ -20,6 +20,9 @@ block content
                 label(for="passwordConfirm") Confirm password
                 input(type="password", id="passwordConfirm", name="passwordConfirm", required) 
             div(class="formElement span2")
+                label(for="adminCode") Admin Code (Optional)
+                input(type="text", id="adminCode", name="adminCode")
+            div(class="formElement span2")
                 button(type="submit", class="submitBtn") Submit
 
         if (errors)
