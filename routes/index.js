@@ -16,6 +16,12 @@ router.get("/new-message", messageController.newMessageGet);
 // Post new message
 router.post("/new-message", messageController.newMessagePost);
 
+// Get remove message page
+router.get("/remove-message/:id", messageController.removeMessageGet);
+
+// Post message delete
+router.post("/remove-message/:id", messageController.removeMessagePost);
+
 // USER ROUTES
 
 // Get sign-up page

@@ -6,13 +6,12 @@ const { body, validationResult } = require("express-validator");
 
 // Display Home Page Messages on Get
 exports.index = asyncHandler(async (req, res, next) => {
+    console.log(req.user);
     const messages = await Message.find()
         .sort({ timeStamp: 1 })
         .populate("author")
         .exec();
-    res.render("index", {
-        messages: messages,
-    });
+    res.render("index", { title: "Members Only", messages: messages });
 });
 
 // Display New Message Form on Get
@@ -65,3 +64,38 @@ exports.newMessagePost = [
         }
     }),
 ];
+
+// Display remove message on get
+exports.removeMessageGet = asyncHandler(async (req, res, next) => {
+    const message = await Message.findOne({ _id: req.params.id })
+        .populate("author")
+        .exec();
+
+    res.render("remove-message", {
+        title: "Confirm Remove Message",
+        message: message,
+    });
+});
+
+// Handle remove message post
+exports.removeMessagePost = asyncHandler(async (req, res, next) => {
+    const message = await Message.findOne({ _id: req.params.id })
+        .populate("author")
+        .exec();
+
+    if (message) {
+        await Message.deleteOne({ _id: req.params.id });
+        await User.findOneAndUpdate(
+            { _id: message.author._id },
+            { $pull: { messages: message._id } }
+        );
+    } else {
+        res.render("remove-message", {
+            title: "Confirm Remove Message",
+            message: message,
+            error: "Unable to Find and Delete Message",
+        });
+    }
+
+    res.redirect("/");
+});

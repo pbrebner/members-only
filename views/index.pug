@@ -21,4 +21,6 @@ block content
           p(class="messageText span2")= message.message
           if (currentUser && currentUser.memberStatus === true)
             p(class="messageAuthor")= message.author.name
-            p(class="messageDate")= message.timeStampFormatted
+            p(class="messageDate right-justify")= message.timeStampFormatted
+            if (currentUser.admin === true)
+              a(href=`/remove-message/${message._id}` class="deleteMessage") Delete 
