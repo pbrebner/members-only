@@ -62,7 +62,6 @@ exports.signUpPost = [
         .isEmail()
         .custom(async (value) => {
             const user = await User.find({ email: value });
-            console.log(user);
             if (user.length > 0) {
                 throw new Error(
                     "Email is already in use, please use a different one"
@@ -77,6 +76,7 @@ exports.signUpPost = [
     body("passwordConfirm", "Passwords must match").custom((value, { req }) => {
         return value === req.body.password;
     }),
+    body("adminCode").trim().escape(),
 
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
@@ -92,6 +92,7 @@ exports.signUpPost = [
                     email: req.body.email,
                     password: hashedPassword,
                     memberStatus: true,
+                    admin: req.body.adminCode === "secretCode" ? true : false,
                 });
 
                 if (!errors.isEmpty()) {
