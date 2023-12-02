@@ -10,18 +10,15 @@ const bcrypt = require("bcryptjs");
 // Set up passport to authenticate login
 passport.use(
     new LocalStrategy(async (username, password, done) => {
-        console.log("running");
         try {
             const user = await User.findOne({ email: username });
             console.log(user);
             if (!user) {
-                console.log("username");
                 return done(null, false, { message: "Incorrect username" });
             }
             const match = await bcrypt.compare(password, user.password);
             if (!match) {
                 // passwords do not match!
-                console.log("password");
                 return done(null, false, { message: "Incorrect password" });
             }
             return done(null, user);
@@ -73,7 +70,7 @@ exports.signUpPost = [
             }
         })
         .escape(),
-    body("password", "Password must not be empty")
+    body("password", "Password must not be a minimum of 5 characters")
         .trim()
         .isLength({ min: 5 })
         .escape(),
@@ -94,6 +91,7 @@ exports.signUpPost = [
                     lastName: req.body.lastName,
                     email: req.body.email,
                     password: hashedPassword,
+                    memberStatus: true,
                 });
 
                 if (!errors.isEmpty()) {
