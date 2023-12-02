@@ -10,7 +10,9 @@ exports.index = asyncHandler(async (req, res, next) => {
         .sort({ timeStamp: 1 })
         .populate("author")
         .exec();
-    res.render("index", { title: "Messages", messages: messages });
+    res.render("index", {
+        messages: messages,
+    });
 });
 
 // Display New Message Form on Get

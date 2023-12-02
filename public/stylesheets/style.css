@@ -1,8 +1,167 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+:root {
+    --main-white: #fffaff;
+    --main-blue: #2ba1f6;
+    --accent-blue: #133ea3;
+    --accent-pink: #f22c5e;
 }
 
-a {
-  color: #00B7FF;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    background-color: var(--main-white);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.accentColor {
+    color: var(--accent-pink);
+}
+
+/* Styles for Header */
+.header {
+    padding: 40px;
+    height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.appName {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--main-blue);
+    text-decoration: none;
+}
+
+.headerLinks {
+    display: flex;
+    gap: 50px;
+}
+
+.headerLink {
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.headerLink:hover {
+    scale: 1.1;
+}
+
+/* Styles for Main Section */
+.main {
+    padding: 50px;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+
+.appDescription {
+    font-size: 1.1rem;
+    font-weight: 500;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.messageContainer {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgb(229, 230, 230);
+    min-width: 500px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    gap: 10px;
+}
+
+.span2 {
+    grid-column: 1 / -1;
+}
+
+.formElement {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formElement label {
+    font-size: 1rem;
+}
+
+.formElement input,
+.formElement textarea {
+    padding: 4px;
+    font-size: 0.9rem;
+}
+
+.submitBtn {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background-color: var(--accent-blue);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    filter: brightness(130%);
+}
+
+/* Styles for Footer */
+.footer {
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerElement {
+    display: flex;
+    gap: 3px;
+}
+
+.footerElement a {
+    text-decoration: none;
+    color: black;
+
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }

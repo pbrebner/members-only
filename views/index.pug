@@ -1,13 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  if (currentUser)
-    h2 Welcome Back
-  each message in messages
-    div(class="messageContainer")
-    h3(class="messageTitle")= message.title 
-    p(class="messageText")= message.message
-    if (currentUser && currentUser.memberStatus === true)
-      p= message.author.name
-      p= message.timeStamp
+  main.main
+    h1 
+      | Special club for 
+      span(class="accentColor") members 
+      | only
+    div(class="appDescription") 
+      p 
+        span(class="accentColor") Non-members 
+        | can only see titles and message contents 
+      p 
+        | Only 
+        span(class="accentColor") members 
+        | can see the author and date
+    div(class="messages")
+      each message in messages
+        div(class="messageContainer")
+          h3(class="messageTitle span2")= message.title 
+          p(class="messageText span2")= message.message
+          if (currentUser && currentUser.memberStatus === true)
+            p(class="messageAuthor")= message.author.name
+            p(class="messageDate")= message.timeStampFormatted

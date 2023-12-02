@@ -1,13 +1,14 @@
 extends layout 
 
 block content 
-    h1= title 
-    form(action="", method="post")
-        div(class="formElement")
-            label(for="username") Username
-            input(type="text", id="username", name="username", required)
-        div(class="formElement")
-            label(for="password") Password 
-            input(type="password", id="password", name="password", required) 
-        div(class="formElement")
-            button(type="submit") Log In
+    main.main
+        h1= title 
+        form(action="", method="post")
+            div(class="formElement span2")
+                label(for="username") Username
+                input(type="text", id="username", name="username", required)
+            div(class="formElement span2")
+                label(for="password") Password 
+                input(type="password", id="password", name="password", required) 
+            div(class="formElement span2")
+                button(type="submit", class="submitBtn") Log In
