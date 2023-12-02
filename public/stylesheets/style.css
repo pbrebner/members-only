@@ -112,6 +112,10 @@ form {
     grid-column: 1 / -1;
 }
 
+.right-justify {
+    justify-self: end;
+}
+
 .formElement {
     display: flex;
     flex-direction: column;
@@ -126,6 +130,9 @@ form {
 .formElement textarea {
     padding: 4px;
     font-size: 0.9rem;
+
+    max-width: 410px;
+    max-height: 500px;
 }
 
 .submitBtn {
@@ -141,6 +148,16 @@ form {
 
 .submitBtn:hover {
     filter: brightness(130%);
+}
+
+.deleteMessage {
+    color: var(--accent-pink);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.deleteMessage:hover {
+    text-decoration: underline;
 }
 
 /* Styles for Footer */
