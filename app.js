@@ -24,7 +24,14 @@ const limiter = RateLimit({
 app.use(limiter);
 
 // Add helmet to the middleware chain.
-app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            "script-src": ["'self'", "https://kit.fontawesome.com", ,],
+            "connect-src": [" 'self' ", "https://ka-f.fontawesome.com/"],
+        },
+    })
+);
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
