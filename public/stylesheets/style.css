@@ -26,28 +26,41 @@ body {
 
 /* Styles for Header */
 .header {
-    padding: 40px;
-    height: 100px;
+    padding: 15px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.headerInnerContainer {
+    max-width: 1200px;
+    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.appName {
-    font-size: 2.2rem;
+.appName,
+.appNameAcronym {
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--main-blue);
     text-decoration: none;
 }
 
+.appName {
+    display: none;
+}
+
 .headerLinks {
     display: flex;
-    gap: 50px;
+    align-items: center;
+    gap: 10px;
 }
 
 .headerLink {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     color: black;
     text-decoration: none;
 
@@ -60,9 +73,41 @@ body {
     scale: 1.1;
 }
 
+@media (min-width: 380px) {
+    .headerIcon {
+        display: inline;
+    }
+
+    .appName {
+        display: block;
+    }
+
+    .appNameAcronym {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) {
+    .header {
+        padding: 40px;
+    }
+
+    .appName {
+        font-size: 2.2rem;
+    }
+
+    .headerLinks {
+        gap: 50px;
+    }
+
+    .headerLink {
+        font-size: 1.2rem;
+    }
+}
+
 /* Styles for Main Section */
 .main {
-    padding: 50px;
+    padding: 15px;
 
     flex: 1;
     display: flex;
@@ -72,7 +117,8 @@ body {
 }
 
 h1 {
-    font-size: 2.6rem;
+    font-size: 1.8rem;
+    text-align: center;
 }
 
 .appDescription {
@@ -82,6 +128,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 15px;
 }
 
@@ -95,21 +142,21 @@ h1 {
     padding: 15px;
     border-radius: 15px;
     background-color: rgb(229, 230, 230);
-    min-width: 500px;
+    max-width: 600px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
-form {
-    display: grid;
-    grid-template-columns: 200px 200px;
-    gap: 10px;
-}
-
 .span2 {
     grid-column: 1 / -1;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 .right-justify {
@@ -131,8 +178,11 @@ form {
     padding: 4px;
     font-size: 0.9rem;
 
-    max-width: 410px;
     max-height: 500px;
+}
+
+.formElement textarea {
+    resize: none;
 }
 
 .submitBtn {
@@ -158,6 +208,20 @@ form {
 
 .deleteMessage:hover {
     text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    .main {
+        padding: 50px;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    form {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* Styles for Footer */

@@ -3,27 +3,34 @@ html(lang='en')
   head
     title= title
     meta(charset='utf-8')
+    link(rel="icon" type="image/svg+xml" href="../public/icons/PB.svg")
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="https://kit.fontawesome.com/5f0b44facf.js" crossorigin="anonymous")
   body
     header(class="header")
-      a(href="/", class="appName") Members Only Club
-      div(class="headerLinks") 
-        if (currentUser)
-          a(href="/new-message", class="newMessageLink headerLink") 
-            i(class="fa fa-plus")
-            | Create New Message
-          a(href="/log-out", class="logOutLink headerLink")
-            i(class="fa fa-arrow-right-to-bracket")
-            | Log Out
-        else
-          a(href="/log-in", class="logInLink headerLink") 
-            i(class="fa fa-arrow-right-to-bracket")
-            | Log In
-          a(href="/sign-up", class="signUpLink headerLink") 
-            i(class="fa fa-user-plus")
-            | Sign Up
+      div(class="headerInnerContainer") 
+        a(href="/", class="appName") Members Only Club
+        a(href="/", class="appNameAcronym") MOC
+        div(class="headerLinks") 
+          if (currentUser)
+            a(href="/new-message", class="newMessageLink headerLink") 
+
+              i(class="fa fa-plus")
+              | Message
+            a(href="/log-out", class="logOutLink headerLink")
+
+              i(class="fa fa-arrow-right-to-bracket")
+              | Log Out
+          else
+            a(href="/log-in", class="logInLink headerLink")
+
+              i(class="fa fa-arrow-right-to-bracket")
+              | Log In
+            a(href="/sign-up", class="signUpLink headerLink") 
+
+              i(class="fa fa-user-plus")
+              | Sign Up
     block content
     footer(class="footer") 
       div(class="footerElement") 
