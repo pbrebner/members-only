@@ -16,5 +16,6 @@ block content
       div(class="formElement span2")
         button(type="submit", class="submitBtn") Confirm  
 
-    if (error)
-      strong= error
+    if (errors)
+      div(class="errorContainer") 
+        p(class="errorMessage")!= errors

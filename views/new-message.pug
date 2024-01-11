@@ -6,9 +6,15 @@ block content
         form(action="", method="post")
             div(class="formElement span2")
                 label(for="title") Title
-                input(type="text", name="title", id="title", required) 
+                input(type="text", name="title", id="title", value=(undefined===message ? '' : message.title)) 
             div(class="formElement span2")
                 label(for="message") Message
-                textarea(name="message", id="message", rows="15", required)  
+                textarea(name="message", id="message", rows="15", value=(undefined===message ? '' : message.message))  
             div(class="formElement span2")
                 button(type="submit", class="submitBtn") Create New Message
+        if (errors)
+            div(class="errorContainer") 
+                p(class="errorHeader") Please fix the following errors:
+                ul(class="errorList")
+                    for error in errors
+                        li(class="errorMessage")!= error.msg

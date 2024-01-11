@@ -5,20 +5,20 @@ block content
         h1= title 
         form(action="", method="post")
             div(class="formElement") 
-                label(for="firstName") First name 
-                input(type="text", id="firstName", name="firstName", required, value=(undefined===user ? '' : user.firstName))
+                label(for="firstName") First name* 
+                input(type="text", id="firstName", name="firstName", value=(undefined===user ? '' : user.firstName))
             div(class="formElement")
-                label(for="lastName") Last name 
-                input(type="text", id="lastName", name="lastName", required, value=(undefined===user ? '' : user.lastName))
+                label(for="lastName") Last name* 
+                input(type="text", id="lastName", name="lastName", value=(undefined===user ? '' : user.lastName))
             div(class="formElement span2")
-                label(for="email") Email 
-                input(type="email", id="email", name="email", required, value=(undefined===user ? '' : user.email)) 
+                label(for="email") Email* 
+                input(type="email", id="email", name="email", value=(undefined===user ? '' : user.email)) 
             div(class="formElement")
-                label(for="password") Password 
-                input(type="password", id="password", name="password", required)
+                label(for="password") Password* 
+                input(type="password", id="password", name="password")
             div(class="formElement")
-                label(for="passwordConfirm") Confirm password
-                input(type="password", id="passwordConfirm", name="passwordConfirm", required) 
+                label(for="passwordConfirm") Confirm password*
+                input(type="password", id="passwordConfirm", name="passwordConfirm") 
             div(class="formElement span2")
                 label(for="adminCode") Admin Code (Optional)
                 input(type="text", id="adminCode", name="adminCode")
@@ -26,7 +26,8 @@ block content
                 button(type="submit", class="submitBtn") Submit
 
         if (errors)
-            p please fix the following errors:
-            ul
-                for error in errors
-                    li!= error.msg
+            div(class="errorContainer") 
+                p(class="errorHeader") Please fix the following errors:
+                ul(class="errorList")
+                    for error in errors
+                        li(class="errorMessage")!= error.msg
