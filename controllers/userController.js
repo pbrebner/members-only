@@ -12,14 +12,15 @@ passport.use(
     new LocalStrategy(async (username, password, done) => {
         try {
             const user = await User.findOne({ email: username });
-            console.log(user);
             if (!user) {
                 return done(null, false, { message: "Incorrect username" });
             }
             const match = await bcrypt.compare(password, user.password);
             if (!match) {
                 // passwords do not match!
-                return done(null, false, { message: "Incorrect password" });
+                return done(null, false, {
+                    message: "Incorrect username or password",
+                });
             }
             return done(null, user);
         } catch (err) {
@@ -49,27 +50,27 @@ exports.signUpGet = (req, res, next) => {
 // Handle Sign-up Form Post
 exports.signUpPost = [
     // Validate and sanatize the inputs
-    body("firstName", "First name must not be empty")
+    body("firstName", "First name must not be empty.")
         .trim()
         .isLength({ min: 1 })
         .escape(),
-    body("lastName", "Last name must not be empty")
+    body("lastName", "Last name must not be empty.")
         .trim()
         .isLength({ min: 1 })
         .escape(),
-    body("email", "Must use valid email")
+    body("email", "Must include a valid email (example: example@email.com).")
         .trim()
         .isEmail()
         .custom(async (value) => {
             const user = await User.find({ email: value });
             if (user.length > 0) {
                 throw new Error(
-                    "Email is already in use, please use a different one"
+                    "Email is already in use, please use a different one."
                 );
             }
         })
         .escape(),
-    body("password", "Password must not be a minimum of 5 characters")
+    body("password", "Password must be a minimum of 5 characters.")
         .trim()
         .isLength({ min: 5 })
         .escape(),
@@ -92,9 +93,13 @@ exports.signUpPost = [
                     email: req.body.email,
                     password: hashedPassword,
                     memberStatus: true,
-                    admin: req.body.adminCode === "secretCode" ? true : false,
+                    admin:
+                        req.body.adminCode === process.env.ADMIN_CODE
+                            ? true
+                            : false,
                 });
 
+                // If errors exist, render form page with errors
                 if (!errors.isEmpty()) {
                     res.render("sign-up", {
                         title: "Sign-up Form",
@@ -103,7 +108,7 @@ exports.signUpPost = [
                     });
                 } else {
                     await user.save();
-                    res.redirect("/");
+                    res.redirect("/log-in");
                 }
             }
         });
@@ -116,11 +121,26 @@ exports.logInGet = (req, res, next) => {
 };
 
 // Handle Log-In Post
-exports.logInPost = passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/log-in",
-    failueMessage: true,
-});
+exports.logInPost = (req, res) => {
+    passport.authenticate("local", (err, user, options) => {
+        if (user) {
+            // If the user exists log him in:
+            req.login(user, (error) => {
+                if (error) {
+                    res.send(error);
+                } else {
+                    console.log("Successfully authenticated");
+                    // HANDLE SUCCESSFUL LOGIN
+                    res.redirect("/");
+                }
+            });
+        } else {
+            console.log(options.message); // Prints the reason of the failure
+            // HANDLE FAILURE LOGGING IN
+            res.render("log-in", { title: "Log In", errors: options.message });
+        }
+    })(req, res);
+};
 
 // Handle Log-Out
 exports.logOutGet = (req, res, next) => {
